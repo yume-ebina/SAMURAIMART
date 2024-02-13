@@ -1,8 +1,9 @@
 class ProductsController < ApplicationController
   before_action :set_product, only: [:show, :edit, :update, :destroy]
+  PER = 16
 
   def index
-    @products = Product.all
+    @products = Product.page(params[:page]).per(PER)
   end
 
   def show

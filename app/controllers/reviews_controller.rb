@@ -1,8 +1,9 @@
 class ReviewsController < ApplicationController
   def create
     product = Product.find(params[:product_id])
-    review = product.reviews_new
-    review.save_review(review, review_params)
+    review = product.reviews.new(review_params)
+    review.save
+    # review.save_review(review, review_params)
     redirect_to product_url(product)
   end
 

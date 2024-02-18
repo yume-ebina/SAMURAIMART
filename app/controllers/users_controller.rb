@@ -1,5 +1,6 @@
 class UsersController < ApplicationController
   before_action :set_user
+  before_action :authenticate_user!
   def edit
   end
 
@@ -7,13 +8,17 @@ class UsersController < ApplicationController
     @user.update_without_password(user_params)
     redirect_to mypage_users_url
   end
-
+  
   def mypage
     @user = current_user
   end
   
   def edit_address
     
+  end
+  
+  def favorite
+    @favorites = @user.likees(Product)
   end
   
   private

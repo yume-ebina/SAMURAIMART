@@ -22,10 +22,14 @@ Rails.application.routes.draw do
       get "mypage/edit", :to => "users#edit"
       get "mypage/address/edit", :to => "users#edit_address"
       put "mypage", :to => "users#update"
+      get  "mypage/favorite", :to => "users#favorite"
     end
   end
   
   resources :products do
+    member do
+      get :favorite
+    end
     resources :reviews, only: [:create]
   end
 end

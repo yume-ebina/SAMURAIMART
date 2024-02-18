@@ -23,6 +23,9 @@ Rails.application.routes.draw do
       get "mypage/address/edit", :to => "users#edit_address"
       put "mypage", :to => "users#update"
       get  "mypage/favorite", :to => "users#favorite"
+      get "cart", :to => "shopping_carts#index"
+      post "cart/create", :to => "shopping_carts#create"
+      delete "cart", :to => "shopping_carts#destroy"
     end
   end
   

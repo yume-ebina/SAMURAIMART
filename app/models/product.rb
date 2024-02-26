@@ -1,31 +1,25 @@
 class Product < ApplicationRecord
   belongs_to :category
   has_many :reviews
+  acts_as_likeable
   
   PER = 16
+  
+  scope :display_list, -> (page) { page(page).per(PER) }
  
-  def self.display_list(page)
-    page(page).per(PER)
-  end
-  
-  def self.on_category(category)
-    where(category_id: category)
-  end
-  
-  def self.sort_order(order)
-     order(order)
-  end
-  
-  def self.category_products(category, page)
+  scope :on_category, -> (category) { where(category_id: category) }
+  scope :sort_order, -> (order) { order(order) }
+ 
+  scope :category_products, -> (category, page) { 
     on_category(category).
     display_list(page)
-  end
-  
-  def self.sort_products(sort_order, page)
+  }
+ 
+  scope :sort_products, -> (sort_order, page) {
     on_category(sort_order[:sort_category]).
     sort_order(sort_order[:sort]).
     display_list(page)
-  end
+  }
 
   scope :sort_list, -> { 
     {

@@ -25,7 +25,7 @@
               autofocus: "true",
               required: "",
               autocomplete: "name",
-              placeholder: "侍 太郎"
+              placeholder: @user.name
             %>
 
             <% if @user.errors.messages[:name].present? %>

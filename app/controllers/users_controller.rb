@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   before_action :set_user
   before_action :authenticate_user!
+
   def edit
   end
 
@@ -26,7 +27,18 @@ class UsersController < ApplicationController
       @user = current_user
     end
     
+    def password_set?
+      user_params[:password].present? && user_params[:password_confirmation].present? ?
+      true : false
+    end
+    
     def user_params
+      #{user: [:name, :email,:postal_code, :address, :phone]}
       params.require(:user).permit(:name, :email,:postal_code, :address, :phone, :password, :password_confirmation)
     end
+    
+    # def user_password_params
+    #   #[:password, :password_confirmation]
+    #   params.permit(:password, :password_confirmation)
+    # end
 end

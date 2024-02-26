@@ -26,6 +26,8 @@ Rails.application.routes.draw do
       get "cart", :to => "shopping_carts#index"
       post "cart/create", :to => "shopping_carts#create"
       delete "cart", :to => "shopping_carts#destroy"
+      get "mypage/edit_password", :to =>"users#edit_password"
+      put "mypage/password", :to => "users#update_password"
     end
   end
   

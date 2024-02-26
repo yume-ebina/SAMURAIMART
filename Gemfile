@@ -35,6 +35,23 @@ gem 'jbuilder', '~> 2.5'
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
 
+# devise
+gem 'devise'
+
+#bootstrap
+gem 'bootstrap', '~> 4.6.0'
+gem 'jquery-rails'
+
+gem 'dotenv-rails'
+
+gem 'socialization'
+
+gem 'kaminari'
+
+gem 'faker', :git => 'https://github.com/faker-ruby/faker.git', :tag => 'v2.19.0'
+
+gem 'acts_as_shopping_cart'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]

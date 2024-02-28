@@ -8,7 +8,9 @@
   <h2>商品管理</h2>
   <div class="d-flex flex-column">
     <label class="samuraimart-sidebar-category-label">商品一覧</label>
-    <label class="samuraimart-sidebar-category-label">親カテゴリ管理</label>
+    <label class="samuraimart-sidebar-category-label">
+       <%= link_to "親カテゴリ管理", dashboard_major_categories_path %>
+     </label>
     <label class="samuraimart-sidebar-category-label">
        <%= link_to "カテゴリ管理", dashboard_categories_path %>
      </label>

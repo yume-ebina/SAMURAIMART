@@ -17,7 +17,7 @@ class Dashboard::ProductsController < ApplicationController
       @products = Product.search_for_id_and_name(keyword).display_list(params[:pages])
     else      
       @total_count = Product.count
-      @products = Product.sort_order(@sorted).display_list(params[:page])
+      @products = Product.sort_order(@sorted).display_list(params[:page]).order("updated_at DESC")
     end
   end
 

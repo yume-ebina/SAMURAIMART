@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [:show, :edit, :update, :destroy, :favorite]
+  before_action :set_product, only: [:show, :update, :destroy, :favorite]
   PER = 16
 
   def index
@@ -23,21 +23,6 @@ class ProductsController < ApplicationController
     @reviews = @product.reviews_with_id
     @review = @reviews.new
     @star_repeat_select = Review.star_repeat_select
-  end
-
-  def new
-    @product = Product.new
-    @categories = Category.all
-  end
-
-  def create
-    @product = Product.new(product_params)
-    @product.save
-    redirect_to product_url @product
-  end
-
-  def edit
-    @categories = Category.all
   end
 
   def update

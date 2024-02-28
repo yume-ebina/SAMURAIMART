@@ -1,14 +1,11 @@
 class Dashboard::MajorCategoriesController < ApplicationController
   before_action :authenticate_admin!
-  before_action :set_major_category, only: %w[shoe edit update destroy]
+  before_action :set_major_category, only: %w[edit update destroy]
   layout "dashboard/dashboard"
   
   def index
     @major_categories = MajorCategory.display_list(params[:pages])
     @major_category = MajorCategory.new
-  end
-  
-  def show
   end
   
   def create

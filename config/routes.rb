@@ -16,6 +16,7 @@ Rails.application.routes.draw do
     resources :categories, except: [:new]
     resources :products, except: [:show]
     resources :users, only: [:index, :destroy]
+    resources :orders, only: [:index]
   end
   
   devise_for :users, :controllers => {

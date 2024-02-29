@@ -46,6 +46,7 @@ resource :users, only: [:edit, :update] do
     get "mypage/edit_password", :to =>"users#edit_password"
     put "mypage/password", :to => "users#update_password"
     get  "mypage/favorite", :to => "users#favorite"
+    delete "mypage/delete", :to => "users#destroy"
   end
 end
 

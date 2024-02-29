@@ -40,6 +40,22 @@
     <div class="offset-8 col-4">
       <div class="row">
         <div class="col-6">
+          <h3>小計</h3>
+        </div>
+        <div class="col-6">
+          <h3>￥<%= (@user_cart.total - @user_cart.shipping_cost).fractional / 100 %></h3>
+        </div>
+      </div>      
+      <div class="row">
+        <div class="col-6">
+          <h3>送料</h3>
+        </div>
+        <div class="col-6">
+          <h3>￥<%= @user_cart.shipping_cost.fractional / 100 %></h3>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6">
           <h2>合計</h2>
         </div>
         <div class="col-6">

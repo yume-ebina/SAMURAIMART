@@ -57,6 +57,8 @@ resource :users, only: [:edit, :update] do
     delete "mypage/delete",            :to => "users#destroy"
     get "mypage/cart_history",         :to => "users#cart_history_index", :as => "mypage_cart_histories"
     get "mypage/cart_history/[:num]",  :to => "users#cart_history_show", :as => "mypage_cart_history"
+    get "mypage/register_card",        :to => "users#register_card"
+    post "mypage/token",               :to => "users#token"
   end
 end
 

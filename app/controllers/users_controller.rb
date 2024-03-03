@@ -34,7 +34,58 @@ class UsersController < ApplicationController
   def favorite
     @favorites = @user.likees(Product)
   end
-
+  
+  def destroy
+    @user.deleted_flg = User.switch_flg(@user.deleted_flg)
+    @user.update(deleted_flg: @user.deleted_flg)
+    redirect_to root_url
+  end
+  
+  def cart_history_index
+    @orders = ShoppingCart.search_bought_carts_by_user(@user).page(params[:page]).per(15)
+  end
+  
+  def cart_history_show
+    @cart = ShoppingCart.find(params[:num])
+    @cart_items = ShoppingCartItem.user_cart_items(@cart.id)
+  end
+  
+  def register_card
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    @count = 0
+    card_info = {}
+ 
+    if @user.token != ""
+      result = Payjp::Customer.retrieve(@user.token).cards.all(limit: 1).data[0]
+      @count = Payjp::Customer.retrieve(@user.token).cards.all.count
+ 
+      card_info[:brand] = result.brand
+      card_info[:exp_month] = result.exp_month
+      card_info[:exp_year] = result.exp_year
+      card_info[:last4] = result.last4
+    end
+ 
+    @card = card_info
+  end
+ 
+  def token
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    customer = @user.token
+ 
+    if @user.token != ""
+      cu = Payjp::Customer.retrieve(customer)
+      delete_card = cu.cards.retrieve(cu.cards.data[0]["id"])
+      delete_card.delete
+      cu.cards.create(:card => params["payjp-token"])
+    else
+      cu = Payjp::Customer.create
+      cu.cards.create(:card => params["payjp-token"])
+      @user.token = cu.id
+      @user.save
+    end
+    redirect_to mypage_users_url
+  end
+  
   private
     def set_user
       @user = current_user
